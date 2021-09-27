@@ -1,15 +1,73 @@
-// struct Student {
-//     name: String,
-//     level: u8,
-//     remote: bool,
-// }
-// struct Grades(char, char, char, char, f32);
-// struct Unit;
+// Declare Car struct to describe vehicle with four named fields
+struct Car {
+    color: String,
+    transmission: Transmission,
+    convertible: bool,
+    mileage: u32,
+}
 
-struct Student { name: String, level: u8, remote: bool }
+#[derive(PartialEq, Debug)]
+// Declare enum for Car transmission type
+enum Transmission {
+    Manual,
+    SemiAuto,
+    Automatic,
+}
+
+// Build a "Car" by using values from the input arguments
+// - Color of car (String)
+// - Transmission type (enum value)
+// - Convertible (boolean, true if car is a convertible)
+fn car_factory(color: String, transmission: Transmission, convertible: bool) -> Car {
+
+    // Use the values of the input arguments
+    // All new cars always have zero mileage
+    let car: Car = Car {
+        color,
+        transmission,
+        convertible,
+        mileage: 0,
+    };
+
+    car
+}
+
 fn main() {
-    let user_2 = Student { name: "Dyson Tan".to_string(), level: 5, remote: false };
-    println!(user_2.level)
+    let mut car = car_factory(String::from("Red"), Transmission::Manual, false);
+    println!("Car 1 = {}, {:?} transmission, convertible: {}, mileage: {}", car.color, car.transmission, car.convertible, car.mileage);
+
+    car = car_factory(String::from("Silver"), Transmission::Automatic, true);
+    println!("Car 2 = {}, {:?} transmission, convertible: {}, mileage: {}", car.color, car.transmission, car.convertible, car.mileage);
+
+    car = car_factory(String::from("Yellow"), Transmission::SemiAuto, false);
+    println!("Car 3 = {}, {:?} transmission, convertible: {}, mileage: {}", car.color, car.transmission, car.convertible, car.mileage);
+
+
+    /*fn divide_by_5(num: u32) -> u32 {
+            if (0 == num) {
+                return 0;
+            }
+
+            num / 5
+        }*/
+
+    /*let we_load = WebEvent::WELoad(true);
+
+    let click = MouseClick { x: 100, y: 250 };
+    println!("Mouse click location: {} {}", click.x, click.y);
+    let keys = KeyPress(String::from("Ctrl+"), 'N');
+    println!("\nKeys pressed: {}{}", keys.0, keys.1);
+    println!("\nKeys pressed: {}{}", keys.0, keys.1);
+
+    let we_load = WebEvent::WELoad(true);
+    let we_click = WebEvent::WEClikc(click);
+    let we_key = WebEvent::WEKey(keys);
+    let a = "asa";*/
+
+
+
+    /*  let user_2 = Student { name: "Dyson Tan".to_string(), level: 5, remote: false };
+      println!(user_2.level)*/
     // let user_1 = Student {
     //     name: "Constanc Sharama".to_string(),
     //     level: 2,
@@ -49,6 +107,32 @@ fn main() {
     // a_number=10;
     // println!("The word is {}", a_word);
 }
+/*// enum WebEvent{
+//     WELoad,
+//     WEKey(String,char),
+//     WEClick{x:i64,y:i64}
+// }
+
+struct KeyPress(String, char);
+
+struct MouseClick {
+    x: i64,
+    y: i64,
+}
+
+enum WebEvent { WELoad(bool), WEClikc(MouseClick), WEKey(KeyPress) }
+
+*/
+// struct Student {
+//     name: String,
+//     level: u8,
+//     remote: bool,
+// }
+// struct Grades(char, char, char, char, f32);
+// struct Unit;
+
+// struct Student { name: String, level: u8, remote: bool }
+
 // fn main() {
 //     let a =1;
 //     let b = a;
