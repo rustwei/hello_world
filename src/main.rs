@@ -1,20 +1,39 @@
+// struct Student {
+//     name: String,
+//     level: u8,
+//     remote: bool,
+// }
+// struct Grades(char, char, char, char, f32);
+// struct Unit;
+
+struct Student { name: String, level: u8, remote: bool }
 fn main() {
+    let user_2 = Student { name: "Dyson Tan".to_string(), level: 5, remote: false };
+    println!(user_2.level)
+    // let user_1 = Student {
+    //     name: "Constanc Sharama".to_string(),
+    //     level: 2,
+    //     remote: false,
+    // };
+    //
+    // let grades1 = Grades('A', 'B', 'B', 'A', 3.75);
+    // println!("{} {}", user_1.name, grades1.0);
 
     // let string_2: str = "ace";
 
-    println!("{}", string_2);
+    // println!("{}", string_2);
     // let is_bigger = 1> 4;
     // println!("Is 1 > 4 {}",is_bigger);
-   /* println!("1 +2 ={} and 8-5 = {}, and 15*3={}", 1u32 + 2, 8i32 - 5, 15 * 3);
+    /* println!("1 +2 ={} and 8-5 = {}, and 15*3={}", 1u32 + 2, 8i32 - 5, 15 * 3);
     println!("9/2={} but 9.0/2.0={}", 9u32 / 2, 9.0 / 2.0);*/
 
-   /* let number_64=4.0;
+    /* let number_64=4.0;
     let number_32: f32 = 5.0;*/
 
-   /* let number:u32=14;
+    /* let number:u32=14;
     println!("{}", number);*/
 
-   /* let shadow_num=5;
+    /* let shadow_num=5;
     let shadow_num = shadow_num + 5;
     let shadow_num=shadow_num*2;
     println!("{}", shadow_num);*/
