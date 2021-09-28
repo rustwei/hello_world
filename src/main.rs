@@ -1,48 +1,173 @@
-// Declare Car struct to describe vehicle with four named fields
+#[derive( Debug)]
+enum Color{
+    Blue(String),
+    Green(String),
+    Red(String),
+    Silver,
+}
+#[derive(PartialEq, Debug)]
+enum Age {
+    New,
+    Used,
+}
 struct Car {
     color: String,
-    transmission: Transmission,
-    convertible: bool,
-    mileage: u32,
+    motor: Transmission,
+    roof: bool,
+    age: (Age, u32),
 }
 
-#[derive(PartialEq, Debug)]
-// Declare enum for Car transmission type
-enum Transmission {
-    Manual,
-    SemiAuto,
-    Automatic,
+
+fn car_quality (miles: u32) -> (Age, u32) {
+
+    // Declare and initialize the return tuple value
+    // For a new car, set the miles to 0
+    let quality: (Age, u32) =(Age::New,miles) ;// todo!("Set the `Age` value to \"New\", set the mileage using the `miles` input argument");
+
+    // Return the completed tuple to the caller
+    //todo!("Return the tuple");
+    quality
 }
 
-// Build a "Car" by using values from the input arguments
-// - Color of car (String)
-// - Transmission type (enum value)
-// - Convertible (boolean, true if car is a convertible)
-fn car_factory(color: String, transmission: Transmission, convertible: bool) -> Car {
-
-    // Use the values of the input arguments
-    // All new cars always have zero mileage
-    let car: Car = Car {
-        color,
-        transmission,
-        convertible,
-        mileage: 0,
-    };
-
-    car
+fn car_factory(color: String, motor: Transmission, roof: bool, miles: u32) -> Car {
+    // Create a new "Car" instance as requested
+    // - Bind first three fields to values of input arguments
+    // - "age" field calls "car_quality" function with "miles" input argument
+    Car {
+        color: color,
+        motor: motor,
+        roof: roof,
+        age: car_quality(miles), // todo!("Replace `mileage: miles` with `age` tuple field, call `car_quality()` with `miles` as input argument");
+    }
 }
 
 fn main() {
-    let mut car = car_factory(String::from("Red"), Transmission::Manual, false);
-    println!("Car 1 = {}, {:?} transmission, convertible: {}, mileage: {}", car.color, car.transmission, car.convertible, car.mileage);
 
-    car = car_factory(String::from("Silver"), Transmission::Automatic, true);
-    println!("Car 2 = {}, {:?} transmission, convertible: {}, mileage: {}", car.color, car.transmission, car.convertible, car.mileage);
+    // Create car color array
+    let colors = ["Blue","Red","Blue"]; //todo!("Set the enum values: 0 = Blue, 1 = Green, 2 = Red, 3 = Silver");
+    // colors(0);
 
-    car = car_factory(String::from("Yellow"), Transmission::SemiAuto, false);
-    println!("Car 3 = {}, {:?} transmission, convertible: {}, mileage: {}", car.color, car.transmission, car.convertible, car.mileage);
+    // Declare the car type and initial values
+    let mut car: Car =  Car{
+        color: "".to_string(),
+        motor: Transmission::Manual,
+        roof: false,
+        age: (Age::New, 0)
+    };//todo!("Create `car` as a `Car` struct");
+    let mut engine: Transmission = Transmission::Manual;//todo!("Declare `engine` as a `Transmission` enum, initialize to `Manual`");
+
+    // Order 3 cars, one car for each type of transmission
+
+    // Car order #1: New, Manual, Hard top
+    car = car_factory(String::from(colors[0]), engine, true, 0);
+    println!("Car order 1: {:?}, Hard top = {}, {:?}, {}, {} miles", car.age.0, car.roof, car.motor, car.color, car.age.1);
+
+    // Car order #2: Used, Semi-automatic, Convertible
+    engine = Transmission::SemiAuto;
+    car = car_factory(String::from(colors[1]), engine, false, 100);
+    println!("Car order 2: {:?}, Hard top = {}, {:?}, {}, {} miles", car.age.1, car.roof, car.motor, car.color, car.age.1);
+
+    // Car order #3: Used, Automatic, Hard top
+    engine = Transmission::Automatic;
+    car = car_factory(String::from(colors[2]), engine, true, 200);
+    println!("Car order 3: {:?}, Hard top = {}, {:?}, {}, {} miles", car.age.1, car.roof, car.motor, car.color, car.age.1);
 
 
+    /*  #[derive(PartialEq, Debug)]
+      enum Age {
+          New,
+          Used,
+      }
+      #[derive(PartialEq, Debug)]
+  // Declare Car struct to describe vehicle with four named fields
+      struct Car {
+          color: String,
+          motor: Transmission,
+          roof: bool,
+          mileage: (Age, u32),
+      }
+
+      #[derive(PartialEq, Debug)]
+  // Declare enum for Car transmission type
+      enum Transmission { Manual, SemiAuto, Automatic }
+
+      // Get the car quality by testing the value of the input argument
+  // - miles (u32)
+  // Create a tuple for the car quality with the Age ("New" or "Used") and mileage
+  // Return a tuple with the arrow `->` syntax
+      fn car_quality (miles: u32) -> (Age, u32) {
+
+          // Declare and initialize the return tuple value
+          // For a new car, set the miles to 0
+          let quality: (Age, u32) =(Age::New,miles) ;// todo!("Set the `Age` value to \"New\", set the mileage using the `miles` input argument");
+
+          // Return the completed tuple to the caller
+          //todo!("Return the tuple");
+          quality
+      }
+
+      // Build a new "Car" using the values of four input arguments
+  // - color (String)
+  // - motor (Transmission enum)
+  // - roof (boolean, true if the car has a hard top roof)
+  // - miles (u32)
+  // Call the car_quality(miles) function to get the car age
+  // Return an instance of a "Car" struct with the arrow `->` syntax
+      fn car_factory(color: String, motor: Transmission, roof: bool, miles: u32) -> Car {
+          // Create a new "Car" instance as requested
+          // - Bind first three fields to values of input arguments
+          // - "age" field calls "car_quality" function with "miles" input argument
+          Car {
+              color: color,
+              motor: motor,
+              roof: roof,
+              mileage: car_quality(miles), // todo!("Replace `mileage: miles` with `age` tuple field, call `car_quality()` with `miles` as input argument");
+          }
+      }
+  */
+
+    // let mut a:<vector><T>
+    /* let mut index_vec = vec![15, 3, 46];
+     let three = index_vec[1];
+     println!("Vector: {:?}, three = {}", index_vec, three);
+ /
+     let beyond = index_vec[10];
+     println!("{}", beyond);*/
+    /*
+        let mut fruit = Vec::new();
+        fruit.push("Apple");
+        fruit.push("Banana");
+        fruit.push("Cherry");
+        // fruit.push(1);
+        println!("{:?}", fruit);
+
+        println!("{:?}", fruit.pop());
+        println!("{:?}", fruit);*/
+
+    /*  let three_nums = vec![15, 3, 24];
+      println!("{:?}", three_nums);
+
+      let zeres = vec![0; 5];
+      // println!("{:?}", zeres);
+      println!("{:?}", zeres);*/
+
+    /* let days = ["Sunday", "Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday"];
+     let bytes = [0; 5];
+
+     let first = days[0];
+     println!("{}",first);
+     let seventh  = days[7];*/
+
+    /* let mut car = car_factory(String::from("Red"), Transmission::Manual, false);
+     println!("Car 1 = {}, {:?} transmission, convertible: {}, mileage: {}", car.color, car.transmission, car.convertible, car.mileage);
+
+     car = car_factory(String::from("Silver"), Transmission::Automatic, true);
+     println!("Car 2 = {}, {:?} transmission, convertible: {}, mileage: {}", car.color, car.transmission, car.convertible, car.mileage);
+
+     car = car_factory(String::from("Yellow"), Transmission::SemiAuto, false);
+     println!("Car 3 = {}, {:?} transmission, convertible: {}, mileage: {}", car.color, car.transmission, car.convertible, car.mileage);
+
+ */
     /*fn divide_by_5(num: u32) -> u32 {
             if (0 == num) {
                 return 0;
@@ -107,6 +232,40 @@ fn main() {
     // a_number=10;
     // println!("The word is {}", a_word);
 }
+
+// Declare Car struct to describe vehicle with four named fields
+/*struct Car {
+    color: String,
+    transmission: Transmission,
+    convertible: bool,
+    mileage: u32,
+}*/
+
+#[derive(PartialEq, Debug)]
+// Declare enum for Car transmission type
+enum Transmission {
+    Manual,
+    SemiAuto,
+    Automatic,
+}
+
+// Build a "Car" by using values from the input arguments
+// - Color of car (String)
+// - Transmission type (enum value)
+// - Convertible (boolean, true if car is a convertible)
+/*fn car_factory(color: String, transmission: Transmission, convertible: bool) -> Car {
+
+    // Use the values of the input arguments
+    // All new cars always have zero mileage
+    let car: Car = Car {
+        color,
+        transmission,
+        convertible,
+        mileage: 0,
+    };
+
+    car
+}*/
 /*// enum WebEvent{
 //     WELoad,
 //     WEKey(String,char),
